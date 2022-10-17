@@ -1,0 +1,15 @@
+/Users/hoangthanh/Documents/CS3/bin/Debug/net6.0/CS3
+/Users/hoangthanh/Documents/CS3/bin/Debug/net6.0/CS3.deps.json
+/Users/hoangthanh/Documents/CS3/bin/Debug/net6.0/CS3.runtimeconfig.json
+/Users/hoangthanh/Documents/CS3/bin/Debug/net6.0/CS3.dll
+/Users/hoangthanh/Documents/CS3/bin/Debug/net6.0/CS3.pdb
+/Users/hoangthanh/Documents/CS3/obj/Debug/net6.0/CS3.csproj.AssemblyReference.cache
+/Users/hoangthanh/Documents/CS3/obj/Debug/net6.0/CS3.GeneratedMSBuildEditorConfig.editorconfig
+/Users/hoangthanh/Documents/CS3/obj/Debug/net6.0/CS3.AssemblyInfoInputs.cache
+/Users/hoangthanh/Documents/CS3/obj/Debug/net6.0/CS3.AssemblyInfo.cs
+/Users/hoangthanh/Documents/CS3/obj/Debug/net6.0/CS3.csproj.CoreCompileInputs.cache
+/Users/hoangthanh/Documents/CS3/obj/Debug/net6.0/CS3.dll
+/Users/hoangthanh/Documents/CS3/obj/Debug/net6.0/refint/CS3.dll
+/Users/hoangthanh/Documents/CS3/obj/Debug/net6.0/CS3.pdb
+/Users/hoangthanh/Documents/CS3/obj/Debug/net6.0/CS3.genruntimeconfig.cache
+/Users/hoangthanh/Documents/CS3/obj/Debug/net6.0/ref/CS3.dll
