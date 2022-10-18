@@ -110,6 +110,24 @@ class Program{
     }
     static void Main(string[] args){
         Console.Clear();
+        int len = 1000000;
+        Array arr = Array.CreateInstance(typeof(int), len);
+        List<int> list = new List<int>();
+        ArrayList arl = new ArrayList();
+        Generate_A_L_AL(arr, list, arl, len);
+        Timing timer = new Timing();
+        timer.startTime();
+        SumArray(arr);
+        timer.StopTime();
+        System.Console.WriteLine("Sum Array: {0} ms", timer.Result().TotalMilliseconds);
+        timer.startTime();
+        SumList(list);
+        timer.StopTime();
+        System.Console.WriteLine("Sum List: {0} ms", timer.Result().TotalMilliseconds);
+        timer.startTime();
+        SumArrayList(arl);
+        timer.StopTime();
+        System.Console.WriteLine("Sum ArrayList: {0} ms", timer.Result().TotalMilliseconds);
         /*ArrayList arl = new ArrayList();
         GenerateArrayList1D(arl);
         System.Console.WriteLine("Sum ArrayList: " + SumArrayList1D(arl));*/
