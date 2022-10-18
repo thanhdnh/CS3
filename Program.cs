@@ -81,11 +81,38 @@ class Program{
             sum += v;*/
         return sum;
     }
+    static void Generate_A_L_AL(Array arr, List<int> list, ArrayList arl, int len){
+        Random r = new Random();
+        for(int i=0; i<len; i++){
+            int v = r.Next(1, 99);
+            arr.SetValue(v, i);
+            list.Add(v);
+            arl.Add(v);
+        }
+    }
+    static ulong SumArray(Array arr){
+        ulong sum = 0;
+        foreach(int v in arr)
+            sum += (ulong)v;
+        return sum;
+    }
+    static ulong SumList(List<int> list){
+        ulong sum = 0;
+        foreach(int v in list)
+            sum += (ulong)v;
+        return sum;
+    }
+    static ulong SumArrayList(ArrayList arl){
+        ulong sum = 0;
+        foreach(int v in arl)
+            sum += (ulong)v;
+        return sum;
+    }
     static void Main(string[] args){
         Console.Clear();
-        ArrayList arl = new ArrayList();
+        /*ArrayList arl = new ArrayList();
         GenerateArrayList1D(arl);
-        System.Console.WriteLine("Sum ArrayList: " + SumArrayList1D(arl));
+        System.Console.WriteLine("Sum ArrayList: " + SumArrayList1D(arl));*/
         /*List<List<object>> list2d = new List<List<object>>();
         GenerateList2D(list2d); PrintList2D(list2d);*/
         /*List<float> list = new List<float>();
