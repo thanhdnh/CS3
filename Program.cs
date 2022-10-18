@@ -1,4 +1,6 @@
-﻿class Program{
+﻿using System.Collections;
+using System.Collections.Generic;
+class Program{
     static void InitArray1D(out Array arr, int len, int lb){
         arr = Array.CreateInstance(typeof(int), new int[1]{len}, new int[1]{lb});
         Random r = new Random();
@@ -66,10 +68,26 @@
             System.Console.WriteLine();
         }
     }
+    static void GenerateArrayList1D(ArrayList arl){
+        Random r = new Random();
+        for(int i=0; i<5; i++)
+            arl.Add(r.Next(1, 99));
+    }
+    static int SumArrayList1D(ArrayList arl){
+        int sum = 0;
+        for(int i=0; i<arl.Count; i++)
+            sum += (int)arl[i];
+        /*foreach(int v in arl)
+            sum += v;*/
+        return sum;
+    }
     static void Main(string[] args){
         Console.Clear();
-        List<List<object>> list2d = new List<List<object>>();
-        GenerateList2D(list2d); PrintList2D(list2d);
+        ArrayList arl = new ArrayList();
+        GenerateArrayList1D(arl);
+        System.Console.WriteLine("Sum ArrayList: " + SumArrayList1D(arl));
+        /*List<List<object>> list2d = new List<List<object>>();
+        GenerateList2D(list2d); PrintList2D(list2d);*/
         /*List<float> list = new List<float>();
         GenerateList1D<float>(list);
         System.Console.WriteLine("Sum List: " + SumList1D<float>(list));*/
