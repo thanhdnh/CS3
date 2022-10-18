@@ -39,12 +39,44 @@
             sum += v;
         return sum;
     }
+    static void GenerateList1D<T>(List<T> list){
+        Random r = new Random();
+        for(int i=0; i<5; i++)
+            list.Add((dynamic)r.Next(1, 99));
+    }
+    static T SumList1D<T>(List<T> list){
+        T sum = list[0];
+        for(int i=1; i<list.Count; i++)
+            sum += (dynamic)list[i];
+        return sum;
+    }
+    static void GenerateList2D(List<List<object>> list2d){
+        Random r = new Random();
+        for(int i=0; i<5; i++){
+            List<object> temp = new List<object>();
+            for(int j=0; j<6; j++)
+                temp.Add(r.Next(1, 99));
+            list2d.Add(temp);
+        }
+    }
+    static void PrintList2D(List<List<object>> list2d){
+        for(int i=0; i<list2d.Count; i++){
+            for(int j=0; j<list2d[i].Count; j++)
+                System.Console.Write("{0, 5}", list2d[i][j]);
+            System.Console.WriteLine();
+        }
+    }
     static void Main(string[] args){
         Console.Clear();
-        Array arr2d;
+        List<List<object>> list2d = new List<List<object>>();
+        GenerateList2D(list2d); PrintList2D(list2d);
+        /*List<float> list = new List<float>();
+        GenerateList1D<float>(list);
+        System.Console.WriteLine("Sum List: " + SumList1D<float>(list));*/
+        /*Array arr2d;
         InitArray2D(out arr2d, new int[2]{3, 4}, new int[2]{0, 0});
         PrintArray2D(arr2d);
-        System.Console.WriteLine("Sum Array2D: " + SumArray2D(arr2d));
+        System.Console.WriteLine("Sum Array2D: " + SumArray2D(arr2d));*/
         /*Array arr;
         InitArray1D(out arr, 5, 0);
         PrintArray1D(arr);*/
