@@ -108,9 +108,20 @@ class Program{
             sum += (ulong)v;
         return sum;
     }
+    class Student{
+        public string id;
+        public string hoten;
+        public float dtb;
+    }
     static void Main(string[] args){
         Console.Clear();
-        int len = 1000000;
+        Student sv = new Student();
+        sv.id = "SV01";
+        sv.hoten = "Nguyen A";
+        sv.dtb = 6.5f;
+        List<Student> list = new List<Student>();
+        list.Add(sv);
+        /*int len = 1000000;
         Array arr = Array.CreateInstance(typeof(int), len);
         List<int> list = new List<int>();
         ArrayList arl = new ArrayList();
@@ -127,7 +138,7 @@ class Program{
         timer.startTime();
         SumArrayList(arl);
         timer.StopTime();
-        System.Console.WriteLine("Sum ArrayList: {0} ms", timer.Result().TotalMilliseconds);
+        System.Console.WriteLine("Sum ArrayList: {0} ms", timer.Result().TotalMilliseconds);*/
         /*ArrayList arl = new ArrayList();
         GenerateArrayList1D(arl);
         System.Console.WriteLine("Sum ArrayList: " + SumArrayList1D(arl));*/
