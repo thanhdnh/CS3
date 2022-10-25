@@ -128,6 +128,31 @@ class Program
     }
     return -1;
   }
+  static int FindQ(MyQueue mq, int x)
+  {
+    MyQueue q1 = new MyQueue();
+    int index = 0;
+    int temp = 0;
+    bool flag = false;
+    int count = 0;
+    while(!mq.IsEmpty())
+    {
+        temp = (int)mq.Dequeue().data;
+        q1.Enqueue(temp);
+        if(x == temp && count == 0)
+        {
+            flag = true;
+            count++;
+        }
+        if(flag == false)
+            index++;
+    }
+    if(x != temp && flag == false)
+        index = -1;
+    while(!q1.IsEmpty())
+        mq.Enqueue((int)q1.Dequeue().data);
+    return index;
+  }
   static void Main(string[] args)
   {
     Console.Clear();
@@ -135,10 +160,15 @@ class Program
     //GenerateStack(ms, 10);
 
     //System.Console.WriteLine("Sum of Stack: {0}", SumStack(ms));
-    ms.Push(1);
-    ms.Push(2); ms.Push(3); ms.Push(4); ms.Push(5);
-    System.Console.WriteLine(FindX(ms, 6));
-    System.Console.WriteLine(FindX2(ms, 6));
+    //ms.Push(1);
+    //ms.Push(2); ms.Push(3); ms.Push(4); ms.Push(5);
+    //System.Console.WriteLine(FindX(ms, 6));
+    //System.Console.WriteLine(FindX2(ms, 6));
+    MyQueue mq = new MyQueue();
+    mq.Enqueue(1); mq.Enqueue(2); mq.Enqueue(2); mq.Enqueue(3); 
+    mq.Enqueue(4); mq.Enqueue(5);
+    System.Console.WriteLine(FindQ(mq, 6));
+    
     Console.ReadLine();
   }
 }
