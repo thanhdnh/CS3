@@ -128,19 +128,16 @@ class Program
     }
     return -1;
   }
-  static int FindQ(MyQueue mq, int x)
-  {
+  static int FindQ(MyQueue mq, int x){
     MyQueue q1 = new MyQueue();
     int index = 0;
     int temp = 0;
     bool flag = false;
     int count = 0;
-    while(!mq.IsEmpty())
-    {
+    while(!mq.IsEmpty()){
         temp = (int)mq.Dequeue().data;
         q1.Enqueue(temp);
-        if(x == temp && count == 0)
-        {
+        if(x == temp && count == 0){
             flag = true;
             count++;
         }
@@ -153,10 +150,42 @@ class Program
         mq.Enqueue((int)q1.Dequeue().data);
     return index;
   }
-  static void Main(string[] args)
-  {
+  class Book{
+    public string id, title, author;
+    public int price;
+    public override string ToString(){
+      return $"Book[ID={id}, Title={title}, Authors={author}, Price={price}]";
+    }
+    public Book(string id, string title, string author, int price){
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.price = price;
+    }
+  }
+  static void PrintInfoBook(Stack<Book> st, string id){
+    Stack<Book> temp = new Stack<Book>();
+    while(st.Count!=0){
+        Book b = st.Pop();
+        temp.Push(b);
+        if(b.id.Equals(id)){
+            System.Console.WriteLine(b);
+            break;
+        }
+    }
+    while(temp.Count!=0)
+        st.Push(temp.Pop());
+  }
+  static void Main(string[] args){
     Console.Clear();
-    MyStack ms = new MyStack();
+    Book b1 = new Book("B01", "Toan A1", "Nguyen A", 23000);
+    Book b2 = new Book("B02", "Kinh Te Hoc", "Le B", 22000);
+    Book b3 = new Book("B03", "Khoa Hoc Du Lieu", "Tran C", 25000);
+    Book b4 = new Book("B04", "Co So Lap Trinh", "Ngo D", 21000);
+    Stack<Book> kesach = new Stack<Book>();
+    kesach.Push(b1); kesach.Push(b2); kesach.Push(b3); kesach.Push(b4);
+    PrintInfoBook(kesach, "B02");
+    //MyStack ms = new MyStack();
     //GenerateStack(ms, 10);
 
     //System.Console.WriteLine("Sum of Stack: {0}", SumStack(ms));
@@ -164,11 +193,15 @@ class Program
     //ms.Push(2); ms.Push(3); ms.Push(4); ms.Push(5);
     //System.Console.WriteLine(FindX(ms, 6));
     //System.Console.WriteLine(FindX2(ms, 6));
-    MyQueue mq = new MyQueue();
+    /*MyQueue mq = new MyQueue();
     mq.Enqueue(1); mq.Enqueue(2); mq.Enqueue(2); mq.Enqueue(3); 
     mq.Enqueue(4); mq.Enqueue(5);
-    System.Console.WriteLine(FindQ(mq, 6));
-    
+    System.Console.WriteLine(FindQ(mq, 6));*/
+    /*Stack st = new Stack();
+    Stack<int> st2 = new Stack<int>();
+    Queue q = new Queue();
+    Queue<int> q2 = new Queue<int>();*/
+
     Console.ReadLine();
   }
 }
