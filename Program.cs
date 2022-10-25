@@ -71,59 +71,60 @@ class Program
   static void GenerateStack(MyStack ms, int times)
   {
     Random R = new Random();
-    for(int i=1;i<=times;i++)
-        ms.Push(R.Next(1,100));
+    for (int i = 1; i <= times; i++)
+      ms.Push(R.Next(1, 100));
   }
   static int SumStack(MyStack ms)
   {
-        int Sum = 0;
-        MyStack a = new MyStack();
-        while (ms.IsEmpty()==false){
-            int t = (int)ms.Pop().data;
-            Sum += t;
-            a.Push(t);
-        }
-        while (a.IsEmpty()==false)
-            ms.Push((int)a.Pop().data);
-        return Sum;
+    int Sum = 0;
+    MyStack a = new MyStack();
+    while (ms.IsEmpty() == false)
+    {
+      int t = (int)ms.Pop().data;
+      Sum += t;
+      a.Push(t);
+    }
+    while (a.IsEmpty() == false)
+      ms.Push((int)a.Pop().data);
+    return Sum;
   }
   static int FindX(MyStack ms, int x)
   {
     int index = 0;
     int temp = -1;
     MyStack tmp = new MyStack();
-    while(!ms.IsEmpty())
+    while (!ms.IsEmpty())
     {
-        temp = (int)ms.Pop().data;
-        tmp.Push(temp);
-        if(temp == x)
-            break;
-        else index++;
-    } 
-    if(ms.IsEmpty() && temp != x) 
-        index = -1;
-    while (tmp.IsEmpty()==false)
-            ms.Push((int)tmp.Pop().data);
+      temp = (int)ms.Pop().data;
+      tmp.Push(temp);
+      if (temp == x)
+        break;
+      else index++;
+    }
+    if (ms.IsEmpty() && temp != x)
+      index = -1;
+    while (tmp.IsEmpty() == false)
+      ms.Push((int)tmp.Pop().data);
     return index;
   }
   static int FindX2(MyStack ms, int x)
   {
     MyStack ms1 = new MyStack();
     int count = 0;
-    while(!ms.IsEmpty())
+    while (!ms.IsEmpty())
     {
-        int temp = (int)ms.Pop().data;
-        if(temp != x)
-        {
-            ms1.Push(temp);
-            count++;
-        }
-        else
-        {
-            while(!ms1.IsEmpty())
-                ms.Push(ms1.Pop().data);
-            return count;
-        }
+      int temp = (int)ms.Pop().data;
+      if (temp != x)
+      {
+        ms1.Push(temp);
+        count++;
+      }
+      else
+      {
+        while (!ms1.IsEmpty())
+          ms.Push(ms1.Pop().data);
+        return count;
+      }
     }
     return -1;
   }
@@ -135,9 +136,9 @@ class Program
 
     //System.Console.WriteLine("Sum of Stack: {0}", SumStack(ms));
     ms.Push(1);
-    ms.Push(2);ms.Push(3);ms.Push(4);ms.Push(5);
-    System.Console.WriteLine(FindX(ms,6));
-    System.Console.WriteLine(FindX2(ms,6));
+    ms.Push(2); ms.Push(3); ms.Push(4); ms.Push(5);
+    System.Console.WriteLine(FindX(ms, 6));
+    System.Console.WriteLine(FindX2(ms, 6));
     Console.ReadLine();
   }
 }
