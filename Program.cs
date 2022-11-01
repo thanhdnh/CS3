@@ -64,13 +64,36 @@ class Program
     }
     return -1;
   }
+  static int IntegratedBinSearch(int[]A, int value){
+    int[] Index = new int[A.Length];
+    int[] CopyValue= new int[A.Length];
+    for(int i = 0;i<Index.Length;i++)
+    {
+      Index[i]=i;
+      CopyValue[i]=A[i];
+    }
+    for(int i =0;i<CopyValue.Length-1;i++)
+      for(int j = i+1;j<CopyValue.Length;j++)
+      if (CopyValue[i]>=CopyValue[j])
+      {
+        int m = CopyValue[i];
+        CopyValue[i] = CopyValue[j];
+        CopyValue[j] = m;
+        m = Index[i];
+        Index[i] = Index[j];
+        Index[j] = m;
+      }
+      return Index[BinSearch(CopyValue,value)];
+
+  }
   static void Main(string[] args)
   {
     Console.Clear();
-    int[] arr = new int[10] { 1, 4, 9, 15, 7, 20, 9, 16, 10, 19 };
+    int[] arr = new int[10] { 1, 4, 9, 15, 9, 20, 9, 16, 10, 19 };
     int value = 9;
     int[] sarr = new int[6]{2, 6, 7, 9, 11, 15};
-    System.Console.WriteLine(BinSearch(sarr, value));
+    //System.Console.WriteLine(BinSearch(sarr, value));
+    System.Console.WriteLine(IntegratedBinSearch(arr,value));
     Console.ReadLine();
   }
 }
