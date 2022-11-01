@@ -2,206 +2,75 @@
 using System.Collections.Generic;
 class Program
 {
-  public class Node
+  static int SeqSearch(int[] arr, int value)
   {
-    public Node next;
-    public object data;
+    for (int i = 0; i < arr.Length; i++)
+      if (arr[i] == value) return i;
+    return -1;
   }
-  public class MyStack
+  static int SeqLastSearch(int[] arr, int value)
   {
-    Node top;
-    public bool IsEmpty()
-    {
-      return top == null;
-    }
-    public void Push(object ele)
-    {
-      Node n = new Node();
-      n.data = ele;
-      n.next = top;
-      top = n;
-    }
-    public Node Pop()
-    {
-      if (top == null)
-        return null;
-      Node d = top;
-      top = top.next;
-      return d;
-    }
+    int t = -1;
+    for (int i = 0; i < arr.Length; i++)
+      if (arr[i] == value)
+        t = i;
+    return t;
+  }
+  static List<int> SeqMultiSearch(int[] arr, int value)
+  {
+    List<int> list = new List<int>();
+    for (int i = 0; i < arr.Length; i++)
+      list.Add(i);
+    return list;
   }
 
-  public class Node2
+  static int RecuSearch(int[] arr, int from, int value)
   {
-    public Node2 prev, next;
-    public object data;
-  }
-  public class MyQueue
-  {
-    Node2 rear, front; public bool IsEmpty()
+    if (arr.Length == 0 || from == arr.Length)
     {
-      return rear == null || front == null;
+      return -1;
     }
-    public void Enqueue(object ele)
+    else if (arr[from] == value)
     {
-      Node2 n = new Node2();
-      n.data = ele;
-      if (rear == null)
-      {
-        rear = n; front = n;
-      }
-      else
-      {
-        rear.prev = n;
-        n.next = rear; rear = n;
-      }
+      return from;
     }
-    public Node2 Dequeue()
+    else
     {
-      if (front == null) return null;
-      Node2 d = front;
-      front = front.prev;
-      if (front == null)
-        rear = null;
-      else
-        front.next = null;
-      return d;
+      return RecuSearch(arr, ++from, value);
     }
   }
-  static void GenerateStack(MyStack ms, int times)
+  static int SenSearch(int[] A, int value)
   {
-    Random R = new Random();
-    for (int i = 1; i <= times; i++)
-      ms.Push(R.Next(1, 100));
-  }
-  static int SumStack(MyStack ms)
-  {
-    int Sum = 0;
-    MyStack a = new MyStack();
-    while (ms.IsEmpty() == false)
-    {
-      int t = (int)ms.Pop().data;
-      Sum += t;
-      a.Push(t);
-    }
-    while (a.IsEmpty() == false)
-      ms.Push((int)a.Pop().data);
-    return Sum;
-  }
-  static int FindX(MyStack ms, int x)
-  {
-    int index = 0;
-    int temp = -1;
-    MyStack tmp = new MyStack();
-    while (!ms.IsEmpty())
-    {
-      temp = (int)ms.Pop().data;
-      tmp.Push(temp);
-      if (temp == x)
+    int x = A[A.Length - 1];
+    A[A.Length - 1] = value;
+    int i = 0;
+    for (; i < A.Length; i++)
+      if (A[i] == value)
         break;
-      else index++;
-    }
-    if (ms.IsEmpty() && temp != x)
-      index = -1;
-    while (tmp.IsEmpty() == false)
-      ms.Push((int)tmp.Pop().data);
-    return index;
+    A[A.Length - 1] = x;
+    if (i < A.Length - 1 || A[A.Length - 1] == value)
+      return i;
+    else return -1;
   }
-  static int FindX2(MyStack ms, int x)
-  {
-    MyStack ms1 = new MyStack();
-    int count = 0;
-    while (!ms.IsEmpty())
-    {
-      int temp = (int)ms.Pop().data;
-      if (temp != x)
-      {
-        ms1.Push(temp);
-        count++;
-      }
-      else
-      {
-        while (!ms1.IsEmpty())
-          ms.Push(ms1.Pop().data);
-        return count;
-      }
+
+  static int BinSearch(int[]A,int value){
+    int l=0,r=A.Length-1;
+    int m=0;
+    while(l<=r){
+      m=(l+r)/2;
+      if(A[m]<value) l=m+1;
+      else if(A[m]>value) r=m-1;
+      else if(A[m]==value) return m;
     }
     return -1;
   }
-  static int FindQ(MyQueue mq, int x){
-    MyQueue q1 = new MyQueue();
-    int index = 0;
-    int temp = 0;
-    bool flag = false;
-    int count = 0;
-    while(!mq.IsEmpty()){
-        temp = (int)mq.Dequeue().data;
-        q1.Enqueue(temp);
-        if(x == temp && count == 0){
-            flag = true;
-            count++;
-        }
-        if(flag == false)
-            index++;
-    }
-    if(x != temp && flag == false)
-        index = -1;
-    while(!q1.IsEmpty())
-        mq.Enqueue((int)q1.Dequeue().data);
-    return index;
-  }
-  class Book{
-    public string id, title, author;
-    public int price;
-    public override string ToString(){
-      return $"Book[ID={id}, Title={title}, Authors={author}, Price={price}]";
-    }
-    public Book(string id, string title, string author, int price){
-        this.id = id;
-        this.title = title;
-        this.author = author;
-        this.price = price;
-    }
-  }
-  static void PrintInfoBook(Stack<Book> st, string id){
-    Stack<Book> temp = new Stack<Book>();
-    while(st.Count!=0){
-        Book b = st.Pop();
-        temp.Push(b);
-        if(b.id.Equals(id)){
-            System.Console.WriteLine(b);
-            break;
-        }
-    }
-    while(temp.Count!=0)
-        st.Push(temp.Pop());
-  }
-  static void Main(string[] args){
+  static void Main(string[] args)
+  {
     Console.Clear();
-    Book b1 = new Book("B01", "Toan A1", "Nguyen A", 23000);
-    Book b2 = new Book("B02", "Kinh Te Hoc", "Le B", 22000);
-    Book b3 = new Book("B03", "Khoa Hoc Du Lieu", "Tran C", 25000);
-    Book b4 = new Book("B04", "Co So Lap Trinh", "Ngo D", 21000);
-    Stack<Book> kesach = new Stack<Book>();
-    kesach.Push(b1); kesach.Push(b2); kesach.Push(b3); kesach.Push(b4);
-    PrintInfoBook(kesach, "B02");
-    //MyStack ms = new MyStack();
-    //GenerateStack(ms, 10);
-
-    //System.Console.WriteLine("Sum of Stack: {0}", SumStack(ms));
-    //ms.Push(1);
-    //ms.Push(2); ms.Push(3); ms.Push(4); ms.Push(5);
-    //System.Console.WriteLine(FindX(ms, 6));
-    //System.Console.WriteLine(FindX2(ms, 6));
-    /*MyQueue mq = new MyQueue();
-    mq.Enqueue(1); mq.Enqueue(2); mq.Enqueue(2); mq.Enqueue(3); 
-    mq.Enqueue(4); mq.Enqueue(5);
-    System.Console.WriteLine(FindQ(mq, 6));*/
-    /*Stack st = new Stack();
-    Stack<int> st2 = new Stack<int>();
-    Queue q = new Queue();
-    Queue<int> q2 = new Queue<int>();*/
-
+    int[] arr = new int[10] { 1, 4, 9, 15, 7, 20, 9, 16, 10, 19 };
+    int value = 9;
+    int[] sarr = new int[6]{2, 6, 7, 9, 11, 15};
+    System.Console.WriteLine(BinSearch(sarr, value));
     Console.ReadLine();
   }
 }
