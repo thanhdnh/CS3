@@ -165,12 +165,33 @@ public class Program
         current = current.blink;
       }
     }
+    public int SumDLL(){
+      Node2 current = header;
+      int sum = 0;
+      while(!(current.flink == null))
+      {
+        current = current.flink;
+        sum += int.Parse(current.element.ToString());
+      }
+      return sum;
+    }
+    public int FindMax(){
+      Node2 current = header.flink;
+      int max=int.Parse(current.element.ToString());
+      while (current.flink!=null)
+      {
+        current=current.flink;
+        if (int.Parse(current.element.ToString())>max)
+            max= int.Parse(current.element.ToString());
+      }
+      return max;
+    }
   }
   static void Main()
   {
     Console.Clear();
     
-    LinkedList ll = new LinkedList();
+    /*LinkedList ll = new LinkedList();
     ll.Insert("11", "Header");
     ll.Insert("22", "11");
     ll.Insert("33", "22");
@@ -178,7 +199,16 @@ public class Program
     ll.AddLast("100");
     ll.AddBefore("111", "33");
     ll.Print();
-    Console.WriteLine(ll.Count());
+    Console.WriteLine(ll.Count());*/
+
+    DoubleLinkedList dll = new DoubleLinkedList();
+    dll.Insert("11", "Header");
+    dll.Insert("22", "11");
+    dll.Insert("33", "22");
+    dll.Print();
+    System.Console.WriteLine("Sum of DLL: "+dll.SumDLL());
+    System.Console.WriteLine("max: "+ dll.FindMax());
+
     Console.ReadLine();
   }
 }
