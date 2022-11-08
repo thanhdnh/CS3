@@ -63,6 +63,35 @@ public class Program
         current = current.link;
       }
     }
+    
+    public void AddFirst(object newelement){
+        Node newnode = new Node(newelement);
+        newnode.link = header.link;
+        header.link = newnode;
+    }
+    public void AddLast(object newelement){
+        Node current = new Node();
+        current = header;
+        Node newnode = new Node(newelement);
+        while (current.link != null) current = current.link;
+        current.link = newnode;
+    }
+    public void AddBefore(object newelement, object beforelement){
+      Node newnode = new Node(newelement);
+      Node current = FindPrev(beforelement);
+      newnode.link = current.link;
+      current.link = newnode;
+    }
+    public int Count(){
+      Node current = header;
+      int count = 0;
+      while(current.link != null)
+      {
+        current = current.link;
+        count++;
+      }
+      return count;
+    }
   }
 
   public class Node2
@@ -141,8 +170,15 @@ public class Program
   {
     Console.Clear();
     
-
-
+    LinkedList ll = new LinkedList();
+    ll.Insert("11", "Header");
+    ll.Insert("22", "11");
+    ll.Insert("33", "22");
+    ll.AddFirst("99");
+    ll.AddLast("100");
+    ll.AddBefore("111", "33");
+    ll.Print();
+    Console.WriteLine(ll.Count());
     Console.ReadLine();
   }
 }
