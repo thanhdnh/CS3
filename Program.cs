@@ -1,99 +1,148 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-class Program
+public class Program
 {
-  static int SeqSearch(int[] arr, int value)
+  public class Node
   {
-    for (int i = 0; i < arr.Length; i++)
-      if (arr[i] == value) return i;
-    return -1;
-  }
-  static int SeqLastSearch(int[] arr, int value)
-  {
-    int t = -1;
-    for (int i = 0; i < arr.Length; i++)
-      if (arr[i] == value)
-        t = i;
-    return t;
-  }
-  static List<int> SeqMultiSearch(int[] arr, int value)
-  {
-    List<int> list = new List<int>();
-    for (int i = 0; i < arr.Length; i++)
-      list.Add(i);
-    return list;
-  }
-
-  static int RecuSearch(int[] arr, int from, int value)
-  {
-    if (arr.Length == 0 || from == arr.Length)
+    public object element;
+    public Node link;
+    public Node()
     {
-      return -1;
+      element = null;
+      link = null;
     }
-    else if (arr[from] == value)
+    public Node(object element)
     {
-      return from;
-    }
-    else
-    {
-      return RecuSearch(arr, ++from, value);
+      this.element = element;
+      link = null;
     }
   }
-  static int SenSearch(int[] A, int value)
+  public class LinkedList
   {
-    int x = A[A.Length - 1];
-    A[A.Length - 1] = value;
-    int i = 0;
-    for (; i < A.Length; i++)
-      if (A[i] == value)
-        break;
-    A[A.Length - 1] = x;
-    if (i < A.Length - 1 || A[A.Length - 1] == value)
-      return i;
-    else return -1;
-  }
-
-  static int BinSearch(int[]A,int value){
-    int l=0,r=A.Length-1;
-    int m=0;
-    while(l<=r){
-      m=(l+r)/2;
-      if(A[m]<value) l=m+1;
-      else if(A[m]>value) r=m-1;
-      else if(A[m]==value) return m;
-    }
-    return -1;
-  }
-  static int IntegratedBinSearch(int[]A, int value){
-    int[] Index = new int[A.Length];
-    int[] CopyValue= new int[A.Length];
-    for(int i = 0;i<Index.Length;i++)
+    public Node header;
+    public LinkedList()
     {
-      Index[i]=i;
-      CopyValue[i]=A[i];
+      header = new Node("Header");
     }
-    for(int i =0;i<CopyValue.Length-1;i++)
-      for(int j = i+1;j<CopyValue.Length;j++)
-      if (CopyValue[i]>=CopyValue[j])
+    private Node Find(object element)
+    {
+      Node current = new Node();
+      current = header;
+      while (current.element != element)
+        current = current.link;
+      return current;
+    }
+    public void Insert(object newelement, object afterelement)
+    {
+      Node current = new Node();
+      Node newnode = new Node(newelement);
+      current = Find(afterelement);
+      newnode.link = current.link;
+      current.link = newnode;
+    }
+    public Node FindPrev(object element)
+    {
+      Node current = header;
+      while (current.link != null && current.link.element != element)
+        current = current.link;
+      return current;
+    }
+    public void Remove(object element)
+    {
+      Node current = FindPrev(element);
+      if (current.link != null)
+        current.link = current.link.link;
+    }
+    public void Print()
+    {
+      Node current = new Node();
+      current = header;
+      while (current.link != null)
       {
-        int m = CopyValue[i];
-        CopyValue[i] = CopyValue[j];
-        CopyValue[j] = m;
-        m = Index[i];
-        Index[i] = Index[j];
-        Index[j] = m;
+        Console.WriteLine(current.link.element);
+        current = current.link;
       }
-      return Index[BinSearch(CopyValue,value)];
-
+    }
   }
-  static void Main(string[] args)
+
+  public class Node2
+  {
+    public object element;
+    public Node2 flink, blink;
+    public Node2()
+    {
+      element = null;
+      flink = blink = null;
+    }
+    public Node2(object element)
+    {
+      this.element = element;
+      flink = blink = null;
+    }
+  }
+
+  public class DoubleLinkedList
+  {
+    public Node2 header;
+    public DoubleLinkedList()
+    {
+      header = new Node2("Header");
+    }
+    private Node2 Find(object element)
+    {
+      Node2 current = new Node2();
+      current = header;
+      while (current.element != element)
+      {
+        current = current.flink;
+      }
+      return current;
+    }
+    public void Insert(object newelement, object afterelement)
+    {
+      Node2 current = new Node2();
+      Node2 newnode = new Node2(newelement);
+      current = Find(afterelement);
+      newnode.flink = current.flink;
+      newnode.blink = current;
+      current.flink = newnode;
+    }
+    public void Remove(object element)
+    {
+      Node2 current = Find(element);
+      if (current.flink != null)
+      {
+        current.blink.flink = current.flink;
+        current.flink.blink = current.blink;
+        current.flink = null;
+        current.blink = null;
+      }
+    }
+    private Node2 FindLast()
+    {
+      Node2 current = new Node2();
+      current = header;
+      while (!(current.flink == null))
+        current = current.flink;
+      return current;
+    }
+    public void Print()
+    {
+      Node2 current = new Node2();
+      current = FindLast();
+      while (!(current.blink == null))
+      {
+        Console.WriteLine(current.element);
+        current = current.blink;
+      }
+    }
+  }
+  static void Main()
   {
     Console.Clear();
-    int[] arr = new int[10] { 1, 4, 9, 15, 9, 20, 9, 16, 10, 19 };
-    int value = 9;
-    int[] sarr = new int[6]{2, 6, 7, 9, 11, 15};
-    //System.Console.WriteLine(BinSearch(sarr, value));
-    System.Console.WriteLine(IntegratedBinSearch(arr,value));
+    
+
+
     Console.ReadLine();
   }
 }
