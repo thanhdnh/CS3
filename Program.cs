@@ -201,13 +201,28 @@ public class Program
     ll.Print();
     Console.WriteLine(ll.Count());*/
 
-    DoubleLinkedList dll = new DoubleLinkedList();
+    /*DoubleLinkedList dll = new DoubleLinkedList();
     dll.Insert("11", "Header");
     dll.Insert("22", "11");
     dll.Insert("33", "22");
     dll.Print();
     System.Console.WriteLine("Sum of DLL: "+dll.SumDLL());
-    System.Console.WriteLine("max: "+ dll.FindMax());
+    System.Console.WriteLine("max: "+ dll.FindMax());*/
+
+    LinkedListNode<int> node0 = new LinkedListNode<int>(22);
+    LinkedListNode<int> node1 = new LinkedListNode<int>(33);
+    LinkedListNode<int> node2 = new LinkedListNode<int>(55);
+    LinkedListNode<int> node3 = new LinkedListNode<int>(44);
+    LinkedListNode<int> node4 = new LinkedListNode<int>(77);
+
+    LinkedList<int> llnet = new LinkedList<int>();
+    llnet.AddFirst(node0);
+    llnet.AddLast(node1);
+    llnet.AddBefore(node1, node2);
+    llnet.AddAfter(node2, node3);
+    llnet.AddAfter(node2, node4);
+    foreach(int value in llnet)
+      System.Console.Write(value + " ");
 
     Console.ReadLine();
   }
