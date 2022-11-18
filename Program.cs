@@ -25,12 +25,22 @@ public class Program
     foreach(KeyValuePair<string, Account> kvp in dict)
       System.Console.WriteLine("{0}=>{1}", kvp.Key, kvp.Value);*/
 
-    SortedDictionary<string, Account> sdict = new SortedDictionary<string, Account>();
+    /*SortedDictionary<string, Account> sdict = new SortedDictionary<string, Account>();
     sdict.Add(acc2.getId(), acc2);
     sdict.Add(acc3.getId(), acc3);
     sdict.Add(acc1.getId(), acc1);
     foreach(KeyValuePair<string, Account> kvp in sdict)
-      System.Console.WriteLine("{0}=>{1}", kvp.Key, kvp.Value);
+      System.Console.WriteLine("{0}=>{1}", kvp.Key, kvp.Value);*/
+
+    HTAccount htacc1 = new HTAccount("ID01", "abc", "123", "Hello!");
+    HTAccount htacc2 = new HTAccount("ID02", "def", "123", "Hey!");
+    HTAccount htacc3 = new HTAccount("ID03", "ijk", "123", "Hi!");
+    List<HTAccount> lhtacc = new List<HTAccount>();
+    lhtacc.Add(htacc1);
+    lhtacc.Add(htacc2);
+    lhtacc.Add(htacc3);
+    foreach(HTAccount v in lhtacc)
+      System.Console.WriteLine(v);
 
     Console.ReadLine();
   }
