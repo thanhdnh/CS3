@@ -8,6 +8,7 @@
   }
   public class BinarySearchTree
   {
+    public static int count_node = 0;
     public Node Root { get; set; }
     public bool Insert(int value)
     {
@@ -33,6 +34,7 @@
         else
           before.RightNode = newNode;
       }
+      count_node++;//đếm nút đã thêm vào
       return true;
     }
     public void TraverseInOrder(Node parent)
@@ -127,7 +129,10 @@
       return null;
     }
     public void Remove(int value)
-    { this.Root = Remove(this.Root, value); }
+    { 
+      this.Root = Remove(this.Root, value); 
+      count_node--;
+    }
     private Node Remove(Node parent, int key)
     {
       if (parent == null) return parent;
@@ -142,26 +147,55 @@
       }
       return parent;
     }
+    public int Count(){
+      return Count(Root);
+    }
+    public int Count(Node parent){
+      if( parent == null)
+        return 0;
+      else
+        return 1 + Count(parent.LeftNode) + Count(parent.RightNode);
 
+    }
+    public void Traverse(Node parent, ref int count)
+    {
+      if(parent != null)
+      {
+        Traverse(parent.LeftNode, ref count);
+        Traverse(parent.RightNode, ref count);
+        count++;
+      }
+    }
+    public int Count2()
+    {
+      int count = 0;
+      Traverse(Root, ref count);
+      return count;
+    }
   }
   static void Main()
   {
     Console.Clear();
 
     BinarySearchTree binaryTree = new BinarySearchTree();
-    binaryTree.Insert(23); binaryTree.Insert(16); binaryTree.Insert(45); binaryTree.Insert(3);
+    binaryTree.Insert(23); binaryTree.Insert(16); binaryTree.Insert(45); 
+    binaryTree.Insert(3);
     binaryTree.Insert(22); binaryTree.Insert(37); binaryTree.Insert(99);
-    //Console.WriteLine(">> Max:" + binaryTree.FindMax());  //hoặc dùng binaryTree.FindMax2()   
-    //Console.WriteLine(">> Min:" + binaryTree.FindMin());  //hoặc dùng binaryTree.FindMin2()
-    //Node node = binaryTree.Find(5);
-    //int depth = binaryTree.GetTreeDepth();
+    Console.WriteLine(">> Max:" + binaryTree.FindMax());  //hoặc dùng binaryTree.FindMax2()   
+    Console.WriteLine(">> Min:" + binaryTree.FindMin());  //hoặc dùng binaryTree.FindMin2()
+    Node node = binaryTree.Find(45);
+    Console.WriteLine(">> Find: "+node.Data);
+    int depth = binaryTree.GetTreeDepth();
     Console.WriteLine(">> PreOrder Traversal:"); binaryTree.TraversePreOrder(binaryTree.Root);
     Console.WriteLine("\n>> InOrder Traversal:"); binaryTree.TraverseInOrder(binaryTree.Root);
     Console.WriteLine("\n>> PostOrder Traversal:"); binaryTree.TraversePostOrder(binaryTree.Root);
-    //binaryTree.Remove(7); binaryTree.Remove(8);
-    //Console.WriteLine("\n>> PreOrder After Removing Operation:");
-    //binaryTree.TraversePreOrder(binaryTree.Root);
+    binaryTree.Remove(37); binaryTree.Remove(3);
+    Console.WriteLine("\n>> PreOrder After Removing Operation:");
+    binaryTree.TraversePreOrder(binaryTree.Root);
 
+    /*Console.WriteLine("\n so node la:");
+    Console.WriteLine(binaryTree.Count2());*/
+    System.Console.WriteLine("\nNumber of nodes: " + BinarySearchTree.count_node);
     Console.ReadLine();
   }
 }
