@@ -8,7 +8,7 @@
   }
   public class BinarySearchTree
   {
-    public static int count_node = 0;
+    public static int count_node = 0;//count node - cách 3
     public Node Root { get; set; }
     public bool Insert(int value)
     {
@@ -34,7 +34,7 @@
         else
           before.RightNode = newNode;
       }
-      count_node++;//đếm nút đã thêm vào
+      count_node++;//đếm nút đã thêm vào - cách 3
       return true;
     }
     public void TraverseInOrder(Node parent)
@@ -131,7 +131,7 @@
     public void Remove(int value)
     { 
       this.Root = Remove(this.Root, value); 
-      count_node--;
+      count_node--;//đếm node - cách 3
     }
     private Node Remove(Node parent, int key)
     {
