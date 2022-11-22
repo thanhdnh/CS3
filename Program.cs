@@ -129,8 +129,8 @@
       return null;
     }
     public void Remove(int value)
-    { 
-      this.Root = Remove(this.Root, value); 
+    {
+      this.Root = Remove(this.Root, value);
       count_node--;//đếm node - cách 3
     }
     private Node Remove(Node parent, int key)
@@ -147,11 +147,13 @@
       }
       return parent;
     }
-    public int Count(){
+    public int Count()
+    {
       return Count(Root);
     }
-    public int Count(Node parent){
-      if( parent == null)
+    public int Count(Node parent)
+    {
+      if (parent == null)
         return 0;
       else
         return 1 + Count(parent.LeftNode) + Count(parent.RightNode);
@@ -159,7 +161,7 @@
     }
     public void Traverse(Node parent, ref int count)
     {
-      if(parent != null)
+      if (parent != null)
       {
         Traverse(parent.LeftNode, ref count);
         Traverse(parent.RightNode, ref count);
@@ -172,19 +174,44 @@
       Traverse(Root, ref count);
       return count;
     }
+    public int Sum()
+    {
+      return Sum(Root);
+    }
+    public int Sum(Node parent)
+    {
+      if (parent == null) return 0;
+      return Sum(parent.LeftNode)+Sum(parent.RightNode)+parent.Data;
+    }
+    private bool CheckPythagores(int a, int b, int c){
+      if((a*a==b*b+c*c)||(b*b==a*a+c*c)||(c*c==a*a+b*b))
+        return true;
+      return false;
+    }
+    public void PrintTriPythagoreNodes(Node parent){
+      if (!(parent.LeftNode == null || parent.RightNode == null) 
+      &&(CheckPythagores(parent.Data,parent.LeftNode.Data,parent.RightNode.Data)))
+        System.Console.WriteLine("{0}  {1}  {2}"
+        ,parent.LeftNode.Data,parent.Data,parent.RightNode.Data);
+      if (parent.LeftNode != null) PrintTriPythagoreNodes(parent.LeftNode);
+      if (parent.RightNode != null) PrintTriPythagoreNodes(parent.RightNode);
+    }
+    public void PrintTriPythagoreNodes(){
+      PrintTriPythagoreNodes(Root);
+    }
   }
   static void Main()
   {
     Console.Clear();
 
     BinarySearchTree binaryTree = new BinarySearchTree();
-    binaryTree.Insert(23); binaryTree.Insert(16); binaryTree.Insert(45); 
+    binaryTree.Insert(23); binaryTree.Insert(16); binaryTree.Insert(45);
     binaryTree.Insert(3);
     binaryTree.Insert(22); binaryTree.Insert(37); binaryTree.Insert(99);
     Console.WriteLine(">> Max:" + binaryTree.FindMax());  //hoặc dùng binaryTree.FindMax2()   
     Console.WriteLine(">> Min:" + binaryTree.FindMin());  //hoặc dùng binaryTree.FindMin2()
     Node node = binaryTree.Find(45);
-    Console.WriteLine(">> Find: "+node.Data);
+    Console.WriteLine(">> Find: " + node.Data);
     int depth = binaryTree.GetTreeDepth();
     Console.WriteLine(">> PreOrder Traversal:"); binaryTree.TraversePreOrder(binaryTree.Root);
     Console.WriteLine("\n>> InOrder Traversal:"); binaryTree.TraverseInOrder(binaryTree.Root);
@@ -196,6 +223,7 @@
     /*Console.WriteLine("\n so node la:");
     Console.WriteLine(binaryTree.Count2());*/
     System.Console.WriteLine("\nNumber of nodes: " + BinarySearchTree.count_node);
+    System.Console.WriteLine("Sum of nodes: "+ binaryTree.Sum());
     Console.ReadLine();
   }
 }
