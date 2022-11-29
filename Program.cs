@@ -37,10 +37,30 @@ public class Graph
     adjMatrix[start, eend] = 1;
     adjMatrix[eend, start] = 1;
   }
+  public void AddEdge(string source, string target){
+    int start = -1, eend = -1;
+    for(int i=0; i<vertices.Length; i++){
+      if(vertices[i].label.Equals(source))
+        start = i;
+      if(vertices[i].label.Equals(target))
+        eend = i;
+    }
+    AddEdge(start, eend);
+  }
   public void AddEdgeDiGraph(int start, int eend)
   {
     adjMatrix[start, eend] = 1;
     //adjMatrix[eend, start] = 1;
+  }
+  public void AddEdgeDiGraph(string source, string target){
+    int start = -1, eend = -1;
+    for(int i=0; i<vertices.Length; i++){
+      if(vertices[i].label.Equals(source))
+        start = i;
+      if(vertices[i].label.Equals(target))
+        eend = i;
+    }
+    AddEdgeDiGraph(start, eend);
   }
   public void ShowVertex(int v)
   {
@@ -113,18 +133,23 @@ public class Program{
   public static void Main(string[] args)
   {
     Console.Clear();
-    Graph g = new Graph(4);
+    /*Graph g = new Graph(4);
     g.AddVertex("A");g.AddVertex("B");g.AddVertex("C");g.AddVertex("D");
-    g.AddEdge(0, 1);g.AddEdge(0, 2);g.AddEdge(0, 3);
-    g.AddEdge(1, 2);g.AddEdge(1, 3);
-    g.AddEdge(2, 3);
-    g.ShowAdjMatrix();
+    //g.AddEdge(0, 1);g.AddEdge(0, 2);g.AddEdge(0, 3);
+    //g.AddEdge(1, 2);g.AddEdge(1, 3);
+    //g.AddEdge(2, 3);
+    g.AddEdge("A", "B"); g.AddEdge("A", "C"); g.AddEdge("A", "D");
+    g.AddEdge("B", "C"); g.AddEdge("B", "D");
+    g.AddEdge("C", "D");
+    g.ShowAdjMatrix();*/
     
-    /*Graph g2 = new Graph(3);
+    Graph g2 = new Graph(3);
     g2.AddVertex("A");g2.AddVertex("B");g2.AddVertex("C");
-    g2.AddEdgeDiGraph(0, 1);g2.AddEdgeDiGraph(1, 2);
-    g2.AddEdgeDiGraph(2, 0);
-    g2.ShowAdjMatrix();*/
+    //g2.AddEdgeDiGraph(0, 1);g2.AddEdgeDiGraph(1, 2);
+    //g2.AddEdgeDiGraph(2, 0);
+    g2.AddEdgeDiGraph("A", "B"); g2.AddEdgeDiGraph("B", "C"); 
+    g2.AddEdgeDiGraph("C", "A");
+    g2.ShowAdjMatrix();
 /*
     Graph graph = new Graph(13);
     graph.AddVertex("A"); graph.AddVertex("B");//0 1
