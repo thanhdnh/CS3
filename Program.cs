@@ -113,12 +113,12 @@ public class Program{
   public static void Main(string[] args)
   {
     Console.Clear();
-    /*Graph g = new Graph(4);
+    Graph g = new Graph(4);
     g.AddVertex("A");g.AddVertex("B");g.AddVertex("C");g.AddVertex("D");
     g.AddEdge(0, 1);g.AddEdge(0, 2);g.AddEdge(0, 3);
     g.AddEdge(1, 2);g.AddEdge(1, 3);
     g.AddEdge(2, 3);
-    g.ShowAdjMatrix();*/
+    g.ShowAdjMatrix();
     
     /*Graph g2 = new Graph(3);
     g2.AddVertex("A");g2.AddVertex("B");g2.AddVertex("C");
@@ -149,7 +149,7 @@ public class Program{
     Console.Write("DFS: ");
     graph.DepthFirstSearch();
     Console.Write("\nBFS: ");
-    graph.BreadthFirstSearch();
+    graph.BreadthFirstSearch();*/
     Console.ReadLine();
   }
 }
